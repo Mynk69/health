@@ -455,6 +455,7 @@ const styles = `
 }
 
 .cta-card {
+
   max-width: 900px;
   margin: 0 auto;
   padding: 60px;
@@ -513,6 +514,9 @@ const styles = `
 
 /* ===== Footer ===== */
 .footer {
+//  background: #131e26;
+// background-color: #044d74;
+  background: #ffff;
   padding: 60px 0 30px;
   border-top: 1px solid var(--gray-200);
 }
@@ -673,7 +677,7 @@ export default function Landing() {
                     <div className="item-text">Diet & Nutrition Plans</div>
                   </div>
                   <div className="hero-card-item">
-                    <div className="item-icon">🔮</div>
+                    <div className="item-icon">🔍</div>
                     <div className="item-text">Health Risk Prediction</div>
                   </div>
                 </div>
@@ -717,7 +721,7 @@ export default function Landing() {
               <span className="feature-link">Start chatting →</span>
             </Link>
             <Link to="/predict" className="feature-card">
-              <div className="feature-icon">🔮</div>
+              <div className="feature-icon">🔍</div>
               <h3 className="feature-title">Health Prediction</h3>
               <p className="feature-description">Input your body metrics and lifestyle data to predict potential health risks. Get personalized prevention strategies and recommendations.</p>
               <span className="feature-link">Predict now →</span>

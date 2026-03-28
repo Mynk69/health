@@ -205,7 +205,7 @@ export default function Register() {
       </div>
       <div className="auth-page">
         <div className="auth-card">
-          <div className="auth-logo">🏥</div>
+          <div className="auth-logo"></div>
           <h1 className="auth-title">Create Account</h1>
           <p className="auth-subtitle">Join MedAI for AI-powered healthcare</p>
           
@@ -230,7 +230,7 @@ export default function Register() {
               <input type="password" placeholder="Repeat password" value={form.confirmPassword} onChange={e => setForm({ ...form, confirmPassword: e.target.value })} required />
             </div>
             <button type="submit" className="auth-submit" disabled={loading}>
-              {loading ? '⏳ Creating account...' : '🚀 Create Account'}
+              {loading ? '⏳ Creating account...' : ' Create Account'}
             </button>
           </form>
 

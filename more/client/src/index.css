@@ -115,6 +115,7 @@ input, textarea, select {
    Utility Classes
    ========================================== */
 .container {
+
   max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 24px;

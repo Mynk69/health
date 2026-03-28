@@ -500,8 +500,8 @@ export default function HealthPredict() {
       <div className="predict-page">
         <div className="predict-container">
           <div className="predict-header">
-            <h1>🔮 <span className="gradient-text">Health Prediction</span></h1>
-            <p>Predict potential health risks based on your body metrics and lifestyle</p>
+            <h1>🔍 <span className="gradient-text">Health Prediction</span></h1>
+            <p>Are you healthy? Get check by answering simple questions</p>
           </div>
 
           {!results && !loading && (
