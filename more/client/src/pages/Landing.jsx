@@ -624,7 +624,7 @@ export default function Landing() {
               </h1>
               <p className="hero-description">
                 Upload medical reports for instant analysis, chat with our AI doctor anytime, 
-                and predict potential health risks — all powered by advanced artificial intelligence.
+                and predict potential health risks. <br /> Get cured by dieting , not by medicines 
               </p>
               <div className="hero-buttons">
                 <Link to="/analyze" className="btn-primary">
@@ -640,7 +640,7 @@ export default function Landing() {
                   <div className="stat-label">AI Availability</div>
                 </div>
                 <div className="hero-stat">
-                  <div className="stat-number"><Counter end={50} suffix="K+" /></div>
+                  <div className="stat-number"><Counter end={5} suffix="+" /></div>
                   <div className="stat-label">Reports Analyzed</div>
                 </div>
                 <div className="hero-stat">
