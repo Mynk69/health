@@ -239,8 +239,8 @@ const styles = `
 }
 
 .floating-badge.bottom-left {
-  bottom: 20px;
-  left: -30px;
+  bottom: -50px;
+  left: -20px;
   animation-delay: 2s;
 }
 
