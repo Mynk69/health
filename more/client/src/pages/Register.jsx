@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, Navigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 const styles = `
 .auth-page {
@@ -150,7 +151,7 @@ const styles = `
 }
 `
 
-const API_URL = 'http://localhost:5000/api'
+const API_URL = '/api'
 
 export default function Register() {
   const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '' })
@@ -158,6 +159,12 @@ export default function Register() {
   const [success, setSuccess] = useState('')
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+  const { login, isAuthenticated } = useAuth()
+
+  // Redirect if already logged in
+  if (isAuthenticated) {
+    return <Navigate to="/" replace />
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -182,8 +189,7 @@ export default function Register() {
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error)
-      localStorage.setItem('medai_token', data.token)
-      localStorage.setItem('medai_user', JSON.stringify(data.user))
+      login(data.user, data.token)
       setSuccess('Account created successfully! Redirecting...')
       setTimeout(() => navigate('/'), 1500)
     } catch (err) {

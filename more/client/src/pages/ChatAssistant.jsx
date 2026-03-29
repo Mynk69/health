@@ -265,7 +265,7 @@ const styles = `
 }
 `
 
-const API_URL = 'http://localhost:5000/api'
+const API_URL = '/api'
 
 const quickActions = [
   "I have a headache",

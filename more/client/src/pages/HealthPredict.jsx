@@ -441,7 +441,7 @@ const styles = `
 }
 `
 
-const API_URL = 'http://localhost:5000/api'
+const API_URL = '/api'
 
 export default function HealthPredict() {
   const [step, setStep] = useState(1)

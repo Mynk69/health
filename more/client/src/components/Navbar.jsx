@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 const navStyles = `
 .navbar {
@@ -122,6 +123,61 @@ const navStyles = `
   box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
 }
 
+/* User menu when logged in */
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px 6px 8px;
+  background: var(--primary-50);
+  border: 1px solid var(--primary-200);
+  border-radius: 50px;
+  cursor: default;
+}
+
+.nav-user-avatar {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--primary-500), var(--accent-teal));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.nav-user-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--gray-700);
+}
+
+.btn-logout {
+  padding: 10px 20px;
+  background: rgba(244, 63, 94, 0.08);
+  color: var(--accent-rose);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+  background: rgba(244, 63, 94, 0.15);
+  border-color: rgba(244, 63, 94, 0.3);
+  transform: translateY(-1px);
+}
+
 .nav-mobile-toggle {
   display: none;
   flex-direction: column;
@@ -156,7 +212,7 @@ const navStyles = `
     display: flex;
   }
 
-  .nav-links, .nav-auth {
+  .nav-links, .nav-auth, .nav-user {
     display: none;
   }
 
@@ -184,6 +240,18 @@ const navStyles = `
     background: rgba(255, 255, 255, 0.95);
     padding: 0 20px 20px;
   }
+
+  .nav-user.mobile-open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: calc(100% + 200px);
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 10px 20px 20px;
+    gap: 10px;
+  }
 }
 `
 
@@ -191,6 +259,8 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
+  const { user, isAuthenticated, logout } = useAuth()
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30)
@@ -201,6 +271,17 @@ export default function Navbar() {
   useEffect(() => {
     setMobileOpen(false)
   }, [location])
+
+  const handleLogout = () => {
+    logout()
+    navigate('/')
+  }
+
+  // Get initials for avatar
+  const getInitials = (name) => {
+    if (!name) return '?'
+    return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
+  }
 
   return (
     <>
@@ -219,10 +300,20 @@ export default function Navbar() {
             <li><Link to="/predict" className={location.pathname === '/predict' ? 'active' : ''}>Health Predict</Link></li>
           </ul>
 
-          <div className={`nav-auth ${mobileOpen ? 'mobile-open' : ''}`}>
-            <Link to="/login" className="btn-login">Log In</Link>
-            <Link to="/register" className="btn-signup">Sign Up</Link>
-          </div>
+          {isAuthenticated ? (
+            <div className={`nav-user ${mobileOpen ? 'mobile-open' : ''}`}>
+              <div className="nav-user-info">
+                <div className="nav-user-avatar">{getInitials(user.name)}</div>
+                <span className="nav-user-name">{user.name}</span>
+              </div>
+              <button className="btn-logout" onClick={handleLogout}>Logout</button>
+            </div>
+          ) : (
+            <div className={`nav-auth ${mobileOpen ? 'mobile-open' : ''}`}>
+              <Link to="/login" className="btn-login">Log In</Link>
+              <Link to="/register" className="btn-signup">Sign Up</Link>
+            </div>
+          )}
 
           <button className={`nav-mobile-toggle ${mobileOpen ? 'open' : ''}`} onClick={() => setMobileOpen(!mobileOpen)}>
             <span /><span /><span />

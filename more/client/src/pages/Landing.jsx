@@ -627,8 +627,8 @@ export default function Landing() {
                 Your <span className="highlight">AI Personal Doctor</span> Available 24/7
               </h1>
               <p className="hero-description">
-                Upload medical reports for instant analysis, chat with our AI doctor anytime, 
-                and predict potential health risks. <br /> Get cured by dieting , not by medicines 
+                Upload medical reports for instant analysis, chat with our AI doctor anytime,
+                and predict potential health risks. <br /> Get cured by dieting , not by medicines
               </p>
               <div className="hero-buttons">
                 <Link to="/analyze" className="btn-primary">
